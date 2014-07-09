@@ -1,0 +1,9 @@
+#! /bin/sh -e
+sqlite3 db_pdtb.sqlite < create_db.sql
+
+echo 'Populating parses' 
+python2.7 populate_parse.py $1
+echo 'Populating relations' 
+python2.7 populate_relations.py 
+sqlite3 db_pdtb.db < prejoin_tables.sql
+
